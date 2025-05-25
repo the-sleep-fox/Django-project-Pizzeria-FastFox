@@ -1,0 +1,16 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} reviews {% endblock %}
+
+{% block content %}
+    <div class="page-title">
+        <h1> Reviews about us!</h1>
+        {% for el in reviews %}
+            <div class="p-4 bg-light border rounded">
+                <h2> {{ el.anons }} </h2>
+                <h3> {{ el.full_text }} </h3>
+                <h5> {{ el.date }} </h5>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

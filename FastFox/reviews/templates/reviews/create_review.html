@@ -1,0 +1,18 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Create Review {% endblock %}
+
+{% block content %}
+    <div class="page-title">
+        <h1> You can help us be better!</h1><br>
+        <h1>Leave your review here! </h1><br>
+        <form method="post">
+            {% csrf_token %}<br>
+            {{ form.anons }}<br>
+            {{ form.full_text }}<br>
+            {{ form.date }}<br>
+            <span> {{ error }}</span><br>
+            <button class="btn btn-success" type="submit"> Post review </button>
+        </form>
+    </div>
+{% endblock %}

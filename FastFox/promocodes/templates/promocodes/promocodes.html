@@ -1,0 +1,16 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Promo-codes {% endblock %}
+
+{% block content %}
+    <div class="page-title">
+        <h1> You're most asking: </h1>
+        {% for el in news %}
+            <div class="p-4 bg-light border rounded">
+                <h2> {{ el.title }} </h2>
+                <h3> {{ el.full_text }} </h3>
+                <h5> {{ el.date}} </h5>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

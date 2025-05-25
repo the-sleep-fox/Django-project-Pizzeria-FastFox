@@ -1,0 +1,17 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Offers {% endblock %}
+
+{% block content %}
+    <div class="page-title">
+        <h1> We offer </h1>
+        {% for el in news %}
+            <div class="p-4 bg-light border rounded">
+                <h2> {{ el.specialist_name }} </h2>
+                <h3> {{ el.describing }} </h3>
+                <h5> {{ el.requirements}} </h5>
+                <h5> {{ el.salary}} </h5>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
