@@ -1,0 +1,99 @@
+{% extends 'main/layout.html' %}
+{% block title %}Админ Панель{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1>👑 Админ-Панель</h1>
+
+    <h3>Общая статистика</h3>
+    <div class="row my-4">
+        <div class="col-md-3 p-3 bg-light rounded shadow">
+            <h4>Пользователей: {{ total_users }}</h4>
+        </div>
+        <div class="col-md-3 p-3 bg-light rounded shadow">
+            <h4>Заказов: {{ total_orders }}</h4>
+        </div>
+        <div class="col-md-3 p-3 bg-light rounded shadow">
+            <h4>Отзывов: {{ total_reviews }}</h4>
+            <p>⭐ Средний рейтинг: {{ avg_rating }}</p>
+        </div>
+        <div class="col-md-3 p-3 bg-light rounded shadow">
+            <h4>Общая сумма продаж: {{ total_sales_sum }}</h4>
+        </div>
+    </div>
+
+    <h3>Список клиентов и сумма продаж</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr><th>Клиент</th><th>Сумма продаж</th></tr>
+        </thead>
+        <tbody>
+            {% for user in user_sales %}
+            {% if user.username != "admin" %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.total_sales }}</td>
+            </tr>
+            {% endif %}
+            {% empty %}
+            <tr><td colspan="2">Нет данных</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Статистика по сумме продаж</h3>
+    <ul>
+        <li>Среднее: {{ avg_sales }}</li>
+        <li>Медиана: {{ med_sales }}</li>
+        <li>Мода: {{ mode_sales }}</li>
+    </ul>
+
+<!--    <h3>Статистика по возрасту клиентов</h3>-->
+<!--    <ul>-->
+<!--        <li>Средний возраст: {{ avg_age }}</li>-->
+<!--        <li>Медианный возраст: {{ med_age }}</li>-->
+<!--    </ul>-->
+
+    <h3>🍕 Популярность по типу товара (размеру пиццы)</h3>
+    <canvas id="popularChart" width="400" height="150"></canvas>
+
+    <h3>💸 Прибыль по типу товара</h3>
+    <canvas id="profitChart" width="400" height="150"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const popularLabels = [{% for pt in popular_types %}'{{ pt.pizza__size }}',{% endfor %}];
+    const popularData = [{% for pt in popular_types %}{{ pt.count }},{% endfor %}];
+
+    const profitLabels = [{% for pt in profit_by_type %}'{{ pt.pizza__name }}',{% endfor %}];
+    const profitData = [{% for pt in profit_by_type %}{{ pt.profit|default:0 }},{% endfor %}];
+
+    const ctxPopular = document.getElementById('popularChart').getContext('2d');
+    new Chart(ctxPopular, {
+        type: 'bar',
+        data: {
+            labels: popularLabels,
+            datasets: [{
+                label: 'Количество заказов',
+                data: popularData,
+                backgroundColor: 'rgba(54, 162, 235, 0.7)'
+            }]
+        }
+    });
+
+    const ctxProfit = document.getElementById('profitChart').getContext('2d');
+    new Chart(ctxProfit, {
+        type: 'bar',
+        data: {
+            labels: profitLabels,
+            datasets: [{
+                label: 'Прибыль',
+                data: profitData,
+                backgroundColor: 'rgba(255, 99, 132, 0.7)'
+            }]
+        }
+    });
+</script>
+
+{% endblock %}

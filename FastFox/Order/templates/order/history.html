@@ -1,0 +1,22 @@
+{% extends 'main/layout.html' %}
+{% block title %}История заказов{% endblock %}
+
+{% block content %}
+<div class="container mt-4 p-4 bg-white rounded shadow">
+    <h2>Ваши заказы</h2>
+    {% for order in orders %}
+        <div class="border-bottom mb-3">
+            <h4>Заказ №{{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }}</h4>
+            <ul>
+                {% for item in order.items.all %}
+                    <li>{{ item.pizza.name }} ({{ item.quantity }})</li>
+                {% endfor %}
+            </ul>
+            <strong>Комментарий:</strong> {{ order.comment }}<br>
+            <strong>Итого:</strong> {{ order.total_price }} BYN
+        </div>
+    {% empty %}
+        <p>Вы еще не сделали ни одного заказа.</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Мои заказы{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Мои заказы</h2>
+  {% if orders %}
+    {% for order in orders %}
+      <div class="card mb-3">
+        <div class="card-header">
+          Заказ от {{ order.created_at|date:"d.m.Y H:i" }}
+        </div>
+        <div class="card-body">
+          <ul>
+            {% for item in order.items.all %}
+              <li>{{ item.pizza.name }} — {{ item.quantity }} шт. ({{ item.pizza.price }} р.)</li>
+            {% endfor %}
+          </ul>
+          <p>{{ order.status }}</p>
+          {% if order.comment %}
+            <p><strong>Комментарий:</strong> {{ order.comment }}</p>
+          {% endif %}
+          <p><strong>Сумма:</strong> {{ order.total_price }} р.</p>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>У вас пока нет заказов.</p>
+  {% endif %}
+</div>
+{% endblock %}

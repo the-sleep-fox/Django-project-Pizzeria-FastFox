@@ -12,19 +12,58 @@
     <aside>
         <img src="{% static 'main/img/FastFoxLogo.png' %}" alt="">
         <span class="logo">FastFox</span>
-        <h3>Navigation</h3>
-        <ul>
+        <div class="auth-controls text-end mb-4 me-4">
+                {% if request.user.is_authenticated and request.user.is_superuser %}
+                    <!-- Панель для суперпользователя -->
+                    <h3>Admin Panel</h3>
+                    <ul>
+                      <li><a href="{% url 'admin_dashboard' %}">Django Admin</a></li>
+                        <li><a href="{% url 'manage_orders' %}">Manage Orders</a></li>
+                        <li><a href="{% url 'add_pizza' %}">Add Pizza</a></li>
+                    </ul>
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-danger btn-sm">Выйти</button>
+                    </form>
+                {% elif user.is_authenticated %}
+                    <span class="me-2"> Hi, {{ user.username }}!</span>
+                    <a class="nav-link" href="{% url 'order:my_orders' %}">Мои заказы</a>
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-danger btn-sm">Выйти</button>
+                    </form>
+                    <h3>Navigation</h3>
+                    <ul>
 
-            <a href="{% url 'home' %}"><li>Main</li></a>
-            <a href="{% url 'about' %}"><li>About us</li></a>
-            <a href="{% url 'get_contacts' %}"><li>Contacts</li></a>
-            <a href="{% url 'news_home' %}"><li> News </li></a>
-            <a href="{% url 'see_reviews' %}"><li> Reviews </li></a>
-            <a href="{% url 'promocodes' %}"><li> Promo-codes </li></a>
-            <a href="{% url 'offers' %}"><li> We offer </li></a>
-            <a href="{% url 'questions' %}"><li> You're asking </li></a>
-            <a href="{% url 'create_review' %}"><li><button class="btn btn-info"><i class='fas fa-plus-circle>'></i>Add review</button></li></a>
-        </ul>
+                        <a href="{% url 'home' %}"><li>Main</li></a>
+                        <a href="{% url 'about' %}"><li>About us</li></a>
+                        <a href="{% url 'cart:cart_detail' %}"><li>Cart</li></a>
+                        <a href="{% url 'get_contacts' %}"><li>Contacts</li></a>
+                        <a href="{% url 'news_home' %}"><li> News </li></a>
+                        <a href="{% url 'see_reviews' %}"><li> Reviews </li></a>
+                        <a href="{% url 'promocodes' %}"><li> Promo-codes </li></a>
+                        <a href="{% url 'offers' %}"><li> We offer </li></a>
+                        <a href="{% url 'questions' %}"><li> You're asking </li></a>
+                        <a href="{% url 'create_review' %}"><li><button class="btn btn-info"><i class='fas fa-plus-circle>'></i>Add review</button></li></a>
+                    </ul>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-outline-success btn-sm me-2">Войти</a>
+                    <a href="{% url 'register' %}" class="btn btn-outline-primary btn-sm">Регистрация</a>
+                    <h3>Navigation</h3>
+                    <ul>
+
+                        <a href="{% url 'home' %}"><li>Main</li></a>
+                        <a href="{% url 'about' %}"><li>About us</li></a>
+                        <a href="{% url 'get_contacts' %}"><li>Contacts</li></a>
+                        <a href="{% url 'news_home' %}"><li> News </li></a>
+                        <a href="{% url 'see_reviews' %}"><li> Reviews </li></a>
+                        <a href="{% url 'promocodes' %}"><li> Promo-codes </li></a>
+                        <a href="{% url 'offers' %}"><li> We offer </li></a>
+                        <a href="{% url 'questions' %}"><li> You're asking </li></a>
+                        <a href="{% url 'create_review' %}"><li><button class="btn btn-info"><i class='fas fa-plus-circle>'></i>Add review</button></li></a>
+                    </ul>
+                {% endif %}
+        </div>
 
     </aside>
     <main>

@@ -1,0 +1,7 @@
+<h2>Добавить {{ pizza.name }} в корзину</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.quantity.label_tag }} {{ form.quantity }}
+  <button type="submit">Добавить в корзину</button>
+</form>

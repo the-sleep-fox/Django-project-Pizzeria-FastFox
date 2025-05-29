@@ -1,0 +1,202 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-body p-4 d-flex flex-column align-items-start">
+          <h2 class="card-title text-center mb-4" style="width: 100%;">Register for FastFix Pizzeria</h2>
+          <form method="post" novalidate style="width: 100%; max-width: 400px; margin-left: -147px;" id="registration-form">
+            {% csrf_token %}
+
+            <!-- Form Fields -->
+            {% for field in form %}
+              <div class="mb-3 d-flex align-items-center gap-2">
+                <label for="{{ field.id_for_label }}" class="fw-semibold text-start" style="width: 100px; flex-shrink: 0;">
+                  {{ field.label }}
+                </label>
+                <div style="width: 250px; flex-shrink: 0;">
+                  {{ field }}
+                  {% if field.errors %}
+                    <div class="text-danger small mt-1 text-start">
+                      {% for error in field.errors %}
+                        {{ error }}
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+
+            <!-- Date of Birth -->
+            <div class="mb-3 d-flex align-items-center gap-2">
+              <label class="fw-semibold text-start" style="width: 100px; flex-shrink: 0;">Date of Birth</label>
+              <div class="d-flex gap-2" style="width: 250px; flex-shrink: 0;">
+                <!-- Day -->
+                <select name="day" id="day" class="form-select rounded-3" required style="width: 33.33%;">
+                  <option value="">Day</option>
+                  {% for day in "x"|rjust:"31" %}
+                    <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
+                  {% endfor %}
+                </select>
+
+                <!-- Month -->
+                <select name="month" id="month" class="form-select rounded-3" required style="width: 33.33%;">
+                  <option value="">Month</option>
+                  {% for month in "x"|rjust:"12" %}
+                    <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
+                  {% endfor %}
+                </select>
+
+                <!-- Year -->
+                <select name="year" id="year" class="form-select rounded-3" required style="width: 33.33%;">
+                  <option value="">Year</option>
+                  {% for year in "x"|rjust:"126" %}
+                    {% with year_value=2025|add:forloop.counter|add:-126 %}
+                      {% if year_value >= 1900 and year_value <= 2025 %}
+                        <option value="{{ year_value }}">{{ year_value }}</option>
+                      {% endif %}
+                    {% endwith %}
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <!-- Date of Birth Error -->
+            <div id="dob-error" class="text-danger small mt-1 text-start" style="margin-left: 108px; width: 250px; display: none;"></div>
+
+            <!-- Submit Button -->
+            <div class="d-flex justify-content-center mt-4">
+              <button type="submit" class="btn btn-primary btn-lg rounded-3 px-5" id="submit-button">Register</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Custom CSS for rounded inputs and aesthetics -->
+<style>
+  .form-control, .form-select {
+    border-radius: 10px !important;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s ease;
+    width: 100%;
+  }
+  .form-control:focus, .form-select:focus {
+    border-color: #ff6200;
+    box-shadow: 0 0 5px rgba(255, 98, 0, 0.5);
+  }
+  .card {
+    border: none;
+    border-radius: 15px;
+    background-color: #fff;
+  }
+  .btn-primary {
+    background-color: #ff6200;
+    border-color: #ff6200;
+  }
+  .btn-primary:hover {
+    background-color: #e55a00;
+    border-color: #e55a00;
+  }
+  .btn-primary:disabled {
+    background-color: #ccc;
+    border-color: #ccc;
+    cursor: not-allowed;
+  }
+  .card-body {
+    padding: 2rem !important;
+    min-height: 400px;
+  }
+  .card-body.d-flex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+  }
+  @media (max-width: 576px) {
+    .d-flex.align-items-center {
+      flex-direction: column;
+      align-items: stretch !important;
+      gap: 0.5rem;
+    }
+    .fw-semibold.text-start {
+      width: 100% !important;
+      margin-bottom: 0.25rem;
+    }
+    .d-flex.gap-2 {
+      flex-direction: column;
+    }
+    .form-select, .form-control {
+      width: 100% !important;
+    }
+    .d-flex.gap-2 > .form-select {
+      width: 100% !important;
+    }
+    form {
+      margin-left: 0 !important;
+    }
+    .d-flex[style*="margin-left"] {
+      margin-left: 0 !important;
+      justify-content: center;
+    }
+    #dob-error {
+      margin-left: 0 !important;
+      width: 100% !important;
+    }
+  }
+</style>
+
+<!-- JavaScript for Client-Side Age Validation -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const daySelect = document.getElementById('day');
+    const monthSelect = document.getElementById('month');
+    const yearSelect = document.getElementById('year');
+    const submitButton = document.getElementById('submit-button');
+    const dobError = document.getElementById('dob-error');
+
+    function validateAge() {
+      const day = parseInt(daySelect.value);
+      const month = parseInt(monthSelect.value);
+      const year = parseInt(yearSelect.value);
+
+      // Check if all fields are selected
+      if (!day || !month || !year) {
+        submitButton.disabled = true;
+        dobError.style.display = 'none';
+        return;
+      }
+
+      // Calculate age
+      const today = new Date('2025-05-25');
+      const birthDate = new Date(year, month - 1, day);
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+
+      // Validate age
+      if (age < 18) {
+        submitButton.disabled = true;
+        dobError.textContent = 'You must be at least 18 years old to register.';
+        dobError.style.display = 'block';
+      } else {
+        submitButton.disabled = false;
+        dobError.style.display = 'none';
+      }
+    }
+
+    // Add event listeners to all date fields
+    daySelect.addEventListener('change', validateAge);
+    monthSelect.addEventListener('change', validateAge);
+    yearSelect.addEventListener('change', validateAge);
+
+    // Initial validation
+    validateAge();
+  });
+</script>
+{% endblock %}

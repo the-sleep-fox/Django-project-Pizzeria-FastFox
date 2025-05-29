@@ -81,3 +81,17 @@ form{
     margin-top: 50px;
 }
 
+.card {
+    border-radius: 20px;
+    background-color: #fdfdfd;
+}
+.btn-primary {
+    background-color: #ff6f00;
+    border: none;
+}
+.btn-primary:hover {
+    background-color: #ff8f00;
+}
+.values-section .container {
+  margin-left: -20px;
+}

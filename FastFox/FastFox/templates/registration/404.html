@@ -1,0 +1,8 @@
+{% extends 'main/layout.html' %}
+{% block content %}
+<div class="container mt-5 text-center">
+    <h1>404 - Page Not Found</h1>
+    <p>Sorry, the page you’re looking for doesn’t exist.</p>
+    <a href="{% url 'pizza_list' %}" class="btn btn-primary">Back to Home</a>
+</div>
+{% endblock %}

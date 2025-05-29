@@ -1,14 +1,12 @@
-from django.db import models
 
 # Create your models here.
 
-class Promocodes(models.Model):
-    title = models.CharField("Name", max_length=50)
-    full_text = models.TextField('Question full text')
-    date = models.DateTimeField('Expire date')
+from django.db import models
+
+class PromoCode(models.Model):
+    code = models.CharField(max_length=20, unique=True)
+    discount_percent = models.PositiveIntegerField(default=10)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.title
-    class Meta:
-        verbose_name = "Promo-code"
-        verbose_name_plural = "Promo-codes"
+        return self.code
