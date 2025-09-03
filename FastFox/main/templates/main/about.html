@@ -3,12 +3,12 @@
 {% block title %}About Us — FastFox Pizzeria{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
+
 <section class="hero bg-dark text-white text-center py-5">
   <div class="container">
     <h1 class="display-4 fw-bold">Welcome to FastFox Pizzeria</h1>
     <p class="lead">Crafting perfect pizzas with love since 2023</p>
-    <a href="{% url 'home' %}" class="btn btn-warning btn-lg mt-3">Explore Our Menu</a>
+    <a href="{% url 'pizza:pizza_list' %}" class="btn btn-warning btn-lg mt-3">Explore Our Menu</a>
   </div>
 </section>
 
