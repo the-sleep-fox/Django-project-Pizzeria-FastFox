@@ -1,8 +1,8 @@
 {% extends 'main/layout.html' %}
 {% block title %}Корзина{% endblock %}
 {% block content %}
-<div class="container mt-5">
-  <h2 class="mb-4">Ваша корзина</h2>
+<div>
+  <h2>Ваша корзина</h2>
 
   {% if cart_items %}
     <table class="table">
@@ -23,18 +23,18 @@
             <td>{{ item.quantity }}</td>
             <td>{{ item.get_total_price }} ₽</td>
             <td>
-              <a href="{% url 'cart:remove_from_cart' item.id %}" class="btn btn-sm btn-danger">Удалить</a>
+              <a href="{% url 'cart:remove_from_cart' item.id %}">Удалить</a>
             </td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
-    <h4>Общая сумма: {{ total_price }} ₽</h4>
-    <a href="{% url 'cart:clear_cart' %}" class="btn btn-warning mt-3">Очистить корзину</a>
-    <a href="{% url 'order:create_order' %}" class="btn btn-success mt-3 ms-3">Оформить заказ</a>
+    <h4>Общая сумма: {{ total_price }} Byn</h4>
+    <a href="{% url 'cart:clear_cart' %}">Очистить корзину</a>
+    <a href="{% url 'order:create_order' %}">Оформить заказ</a>
   {% else %}
     <p>Корзина пуста.</p>
-    <a href="{% url 'home' %}" class="btn btn-warning"> Go to menu</a>
+    <a href="{% url 'home' %}"> Go to menu</a>
   {% endif %}
 </div>
 {% endblock %}

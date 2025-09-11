@@ -3,14 +3,14 @@
 {% block title %} News on our site {% endblock %}
 
 {% block content %}
-    <div class="page-title">
+    <div class>
         <h2> {{ article.title }} </h2>
         <h3> {{ article.anons }} </h3>
         {% if el.image %}
-                    <img src="{{ el.image.url }}" alt="Image for {{ el.title }}" class="img-fluid mb-3" style="max-height: 300px;">
+                    <img src="{{ el.image.url }}" alt="Image for {{ el.title }}"  style="max-height: 300px;">
         {% endif %}
         <h5> {{ article.full_text}} </h5>
         <h6> {{ article.date }} </h6>
-        <a href="{% url 'news_home' %}" class="btn btn-warning"> Come back to news</a>
+        <a href="{% url 'news_home' %}"> Come back to news</a>
     </div>
 {% endblock %}

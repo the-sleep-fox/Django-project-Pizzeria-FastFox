@@ -3,14 +3,14 @@
 {% block title %} Reviews {% endblock %}
 
 {% block content %}
-    <div class="page-title">
+    <div>
         <h1>Reviews about us!</h1>
         {% for el in reviews %}
-            <div class="p-4 bg-light border rounded my-4 shadow-sm">
+            <div>
                 <h2>{{ el.anons }}</h2>
                 <p>{{ el.full_text }}</p>
 
-                <div class="text-warning" style="font-size: 20px;">
+                <div style="font-size: 20px;">
                     {% for i in "12345" %}
                         {% if forloop.counter <= el.rating %}
                             ★
@@ -20,8 +20,8 @@
                     {% endfor %}
                 </div>
 
-                <p class="text-muted mt-2 mb-0">Added: {{ el.created_at|date:"d.m.Y H:i" }}</p>
-                <p class="text-muted">By: {{ el.user.username }}</p>
+                <p>Added: {{ el.created_at|date:"d.m.Y H:i" }}</p>
+                <p>By: {{ el.user.username }}</p>
             </div>
         {% empty %}
             <p>No reviews yet.</p>

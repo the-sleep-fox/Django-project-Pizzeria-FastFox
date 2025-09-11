@@ -1,39 +1,39 @@
 {% extends 'main/layout.html' %}
 {% block content %}
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8 col-lg-6">
-      <div class="card shadow-sm">
-        <div class="card-body p-4">
-          <h2 class="card-title text-center mb-4">Your Cart</h2>
+<div>
+  <div>
+    <div>
+      <div>
+        <div>
+          <h2>Your Cart</h2>
           {% if messages %}
-            <div class="alert alert-info">
+            <div>
               {% for message in messages %}
                 {{ message }}
               {% endfor %}
             </div>
           {% endif %}
           {% if cart_items %}
-            <ul class="list-group mb-4">
+            <ul>
               {% for item in cart_items %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li>
                   <span>{{ item.pizza.name }} x {{ item.quantity }} ({{ item.get_subtotal|floatformat:2 }} $)</span>
-                  <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger btn-sm">Remove</a>
+                  <a href="{% url 'remove_from_cart' item.id %}">Remove</a>
                 </li>
               {% endfor %}
             </ul>
             <h4>Total: {{ total_price|floatformat:2 }} $</h4>
-            <div class="d-flex justify-content-center mt-4">
-              <a href="{% url 'place_order' %}" class="btn btn-primary btn-lg rounded-3 px-5">Place Order</a>
+            <div>
+              <a href="{% url 'place_order' %}" >Place Order</a>
             </div>
           {% else %}
-            <p class="text-center">Your cart is empty.</p>
+            <p >Your cart is empty.</p>
           {% endif %}
-          <h3 class="mt-5">Active Orders</h3>
+          <h3>Active Orders</h3>
           {% if active_orders %}
-            <ul class="list-group">
+            <ul>
               {% for order in active_orders %}
-                <li class="list-group-item">
+                <li>
                   <strong>Order #{{ order.id }}</strong> - {{ order.get_status_display }} ({{ order.total_price|floatformat:2 }} $)
                   <ul>
                     {% for item in order.orderitem_set.all %}

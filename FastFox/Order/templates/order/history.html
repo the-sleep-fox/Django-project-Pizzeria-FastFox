@@ -2,10 +2,10 @@
 {% block title %}История заказов{% endblock %}
 
 {% block content %}
-<div class="container mt-4 p-4 bg-white rounded shadow">
+<div>
     <h2>Ваши заказы</h2>
     {% for order in orders %}
-        <div class="border-bottom mb-3">
+        <div>
             <h4>Заказ №{{ order.id }} от {{ order.created_at|date:"d.m.Y H:i" }}</h4>
             <ul>
                 {% for item in order.items.all %}

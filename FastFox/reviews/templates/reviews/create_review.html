@@ -3,7 +3,7 @@
 {% block title %} Create Review {% endblock %}
 
 {% block content %}
-    <div class="page-title">
+    <div>
         <h1>You can help us be better!</h1><br>
         <h1>Leave your review here!</h1><br>
 
@@ -21,8 +21,8 @@
                 {{ form.rating }}<br>
             </div>
 
-            <span class="text-danger">{{ error }}</span><br>
-            <button class="btn btn-success" type="submit">Post review</button>
+            <span>{{ error }}</span><br>
+            <button type="submit">Post review</button>
         </form>
     </div>
 {% endblock %}

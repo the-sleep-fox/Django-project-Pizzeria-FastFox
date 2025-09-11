@@ -1,25 +1,25 @@
 {% extends 'main/layout.html' %}
 
 {% block content %}
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8 col-lg-6">
-      <div class="card shadow-sm">
-        <div class="card-body p-4 d-flex flex-column align-items-start">
-          <h2 class="card-title text-center mb-4" style="width: 100%;">Register for FastFox Pizzeria</h2>
+<div>
+  <div>
+    <div>
+      <div>
+        <div>
+          <h2>Register for FastFox Pizzeria</h2>
           <form method="post" novalidate style="width: 100%; max-width: 400px; margin-left: -147px;" id="registration-form">
             {% csrf_token %}
 
             <!-- Form Fields -->
             {% for field in form %}
-              <div class="mb-3 d-flex align-items-center gap-2">
-                <label for="{{ field.id_for_label }}" class="fw-semibold text-start" style="width: 100px; flex-shrink: 0;">
+              <div>
+                <label for="{{ field.id_for_label }}">
                   {{ field.label }}
                 </label>
                 <div style="width: 250px; flex-shrink: 0;">
                   {{ field }}
                   {% if field.errors %}
-                    <div class="text-danger small mt-1 text-start">
+                    <div>
                       {% for error in field.errors %}
                         {{ error }}
                       {% endfor %}
@@ -29,28 +29,28 @@
               </div>
             {% endfor %}
 
-            <!-- Date of Birth -->
-            <div class="mb-3 d-flex align-items-center gap-2">
-              <label class="fw-semibold text-start" style="width: 100px; flex-shrink: 0;">Date of Birth</label>
-              <div class="d-flex gap-2" style="width: 250px; flex-shrink: 0;">
-                <!-- Day -->
-                <select name="day" id="day" class="form-select rounded-3" required style="width: 33.33%;">
+
+            <div>
+              <label style="width: 100px; flex-shrink: 0;">Date of Birth</label>
+              <div style="width: 250px; flex-shrink: 0;">
+
+                <select name="day" id="day"  required style="width: 33.33%;">
                   <option value="">Day</option>
                   {% for day in "x"|rjust:"31" %}
                     <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
                   {% endfor %}
                 </select>
 
-                <!-- Month -->
-                <select name="month" id="month" class="form-select rounded-3" required style="width: 33.33%;">
+
+                <select name="month" id="month"  required style="width: 33.33%;">
                   <option value="">Month</option>
                   {% for month in "x"|rjust:"12" %}
                     <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
                   {% endfor %}
                 </select>
 
-                <!-- Year -->
-                <select name="year" id="year" class="form-select rounded-3" required style="width: 33.33%;">
+
+                <select name="year" id="year" c required style="width: 33.33%;">
                   <option value="">Year</option>
                   {% for year in "x"|rjust:"126" %}
                     {% with year_value=2025|add:forloop.counter|add:-126 %}
@@ -62,8 +62,8 @@
                 </select>
               </div>
             </div>
-            <!-- Date of Birth Error -->
-            <div id="dob-error" class="text-danger small mt-1 text-start" style="margin-left: 108px; width: 250px; display: none;"></div>
+
+            <div id="dob-error"  style="margin-left: 108px; width: 250px; display: none;"></div>
 
             <!-- Submit Button -->
             <div class="d-flex justify-content-center mt-4">
@@ -76,77 +76,5 @@
   </div>
 </div>
 
-
-<style>
-  .form-control, .form-select {
-    border-radius: 10px !important;
-    border: 1px solid #ced4da;
-    transition: border-color 0.3s ease;
-    width: 100%;
-  }
-  .form-control:focus, .form-select:focus {
-    border-color: #ff6200;
-    box-shadow: 0 0 5px rgba(255, 98, 0, 0.5);
-  }
-  .card {
-    border: none;
-    border-radius: 15px;
-    background-color: #fff;
-  }
-  .btn-primary {
-    background-color: #ff6200;
-    border-color: #ff6200;
-  }
-  .btn-primary:hover {
-    background-color: #e55a00;
-    border-color: #e55a00;
-  }
-  .btn-primary:disabled {
-    background-color: #ccc;
-    border-color: #ccc;
-    cursor: not-allowed;
-  }
-  .card-body {
-    padding: 2rem !important;
-    min-height: 400px;
-  }
-  .card-body.d-flex {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-  }
-  @media (max-width: 576px) {
-    .d-flex.align-items-center {
-      flex-direction: column;
-      align-items: stretch !important;
-      gap: 0.5rem;
-    }
-    .fw-semibold.text-start {
-      width: 100% !important;
-      margin-bottom: 0.25rem;
-    }
-    .d-flex.gap-2 {
-      flex-direction: column;
-    }
-    .form-select, .form-control {
-      width: 100% !important;
-    }
-    .d-flex.gap-2 > .form-select {
-      width: 100% !important;
-    }
-    form {
-      margin-left: 0 !important;
-    }
-    .d-flex[style*="margin-left"] {
-      margin-left: 0 !important;
-      justify-content: center;
-    }
-    #dob-error {
-      margin-left: 0 !important;
-      width: 100% !important;
-    }
-  }
-</style>
 
 {% endblock %}

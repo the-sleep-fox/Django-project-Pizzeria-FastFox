@@ -3,10 +3,10 @@
 {% block title %} Promo-codes {% endblock %}
 
 {% block content %}
-    <div class="page-title">
+    <div>
         <h1> Our Promo-codes: </h1>
         {% for el in promos %}
-            <div class="p-4 bg-light border rounded">
+            <div>
                 <h2> {{ el.code }} </h2>
                 <h3> {{ el.discount_percent }} </h3>
                 <h5> {{ el.is_active}} </h5>

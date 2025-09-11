@@ -2,12 +2,12 @@
 {% block title %}Оформление заказа{% endblock %}
 
 {% block content %}
-<div class="container mt-4 p-4 bg-white rounded shadow">
+<div>
     <h2>Оформление заказа</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="btn btn-success" type="submit">Подтвердить заказ</button>
+        <button type="submit">Подтвердить заказ</button>
     </form>
 </div>
 {% endblock %}

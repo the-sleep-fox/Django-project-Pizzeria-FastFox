@@ -3,15 +3,15 @@
 {% block title %}Мои заказы{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-  <h2 class="mb-4">Мои заказы</h2>
+<div>
+  <h2>Мои заказы</h2>
   {% if orders %}
     {% for order in orders %}
-      <div class="card mb-3">
-        <div class="card-header">
+      <div>
+        <div>
           Заказ от {{ order.created_at|date:"d.m.Y H:i" }}
         </div>
-        <div class="card-body">
+        <div>
           <ul>
             {% for item in order.items.all %}
               <li>{{ item.pizza.name }} — {{ item.quantity }} шт. ({{ item.pizza.price }} р.)</li>
