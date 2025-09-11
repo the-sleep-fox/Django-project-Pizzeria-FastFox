@@ -6,7 +6,7 @@
     <div class="col-md-8 col-lg-6">
       <div class="card shadow-sm">
         <div class="card-body p-4 d-flex flex-column align-items-start">
-          <h2 class="card-title text-center mb-4" style="width: 100%;">Register for FastFix Pizzeria</h2>
+          <h2 class="card-title text-center mb-4" style="width: 100%;">Register for FastFox Pizzeria</h2>
           <form method="post" novalidate style="width: 100%; max-width: 400px; margin-left: -147px;" id="registration-form">
             {% csrf_token %}
 
@@ -76,7 +76,7 @@
   </div>
 </div>
 
-<!-- Custom CSS for rounded inputs and aesthetics -->
+
 <style>
   .form-control, .form-select {
     border-radius: 10px !important;
@@ -149,54 +149,4 @@
   }
 </style>
 
-<!-- JavaScript for Client-Side Age Validation -->
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const daySelect = document.getElementById('day');
-    const monthSelect = document.getElementById('month');
-    const yearSelect = document.getElementById('year');
-    const submitButton = document.getElementById('submit-button');
-    const dobError = document.getElementById('dob-error');
-
-    function validateAge() {
-      const day = parseInt(daySelect.value);
-      const month = parseInt(monthSelect.value);
-      const year = parseInt(yearSelect.value);
-
-      // Check if all fields are selected
-      if (!day || !month || !year) {
-        submitButton.disabled = true;
-        dobError.style.display = 'none';
-        return;
-      }
-
-      // Calculate age
-      const today = new Date('2025-05-25');
-      const birthDate = new Date(year, month - 1, day);
-      let age = today.getFullYear() - birthDate.getFullYear();
-      const monthDiff = today.getMonth() - birthDate.getMonth();
-      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-      }
-
-      // Validate age
-      if (age < 18) {
-        submitButton.disabled = true;
-        dobError.textContent = 'You must be at least 18 years old to register.';
-        dobError.style.display = 'block';
-      } else {
-        submitButton.disabled = false;
-        dobError.style.display = 'none';
-      }
-    }
-
-    // Add event listeners to all date fields
-    daySelect.addEventListener('change', validateAge);
-    monthSelect.addEventListener('change', validateAge);
-    yearSelect.addEventListener('change', validateAge);
-
-    // Initial validation
-    validateAge();
-  });
-</script>
 {% endblock %}
