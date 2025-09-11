@@ -1,12 +1,18 @@
 from django.shortcuts import render
 
+import news
 from Pizza.models import Pizza
+from news.models import Articles
 
 
-#getting a response
 def index(request):
-    return render(request, 'main/main_page.html')
-    # pizzas = Pizza.objects.all()
-    # return render(request, 'pizza/pizza_list.html', {'pizzas': pizzas})
+    last_news = Articles.objects.order_by('-date').first()
+    return render(request, 'main/main_page.html', {
+        'last_news': last_news
+    })
+
+
+
+
 def about(request):
     return render(request, 'main/about.html')

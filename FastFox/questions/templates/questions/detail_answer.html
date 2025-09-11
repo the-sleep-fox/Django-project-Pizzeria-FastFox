@@ -1,0 +1,13 @@
+
+{% extends 'main/layout.html' %}
+
+{% block title %} You're asking {% endblock %}
+
+{% block content %}
+    <div class>
+        <h2> {{ answer.title }} </h2>
+        <h5> {{ answer.full_text}} </h5>
+        <h6> {{ answer.date }} </h6>
+        <a href="{% url 'questions' %}"> Come back to question</a>
+    </div>
+{% endblock %}

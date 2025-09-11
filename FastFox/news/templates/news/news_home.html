@@ -12,7 +12,7 @@
                 {% if el.image %}
                     <img src="{{ el.image.url }}" alt="Image for {{ el.title }}" style="max-height: 300px;">
                 {% endif %}
-                <h5>{{ el.full_text }}</h5>
+
                 <h6> {{el.date}} </h6>
                 <a href="{% url 'news-detail' el.id %}"> Read details</a>
             </div>

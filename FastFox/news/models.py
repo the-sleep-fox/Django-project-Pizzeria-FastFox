@@ -10,8 +10,8 @@ class Articles(models.Model):
     anons = models.CharField("Anons", max_length=250)
     full_text = models.TextField('Article full text')
     date = models.DateTimeField('Publish date')
-    image = models.ImageField("Photo", upload_to='news_images/', blank=True, null=True)  # новое поле
-
+    image = models.ImageField("Photo", upload_to='news_images/', blank=True, null=True)
+    
     def __str__(self):
         return self.title
 

@@ -8,8 +8,9 @@
         {% for el in quests %}
             <div>
                 <h2> {{ el.title }} </h2>
-                <h4> {{ el.full_text }} </h4>
+
                 <h5> {{ el.date }} </h5>
+                <a href="{% url 'answer-details' el.id %}"> Read answer</a>
             </div>
         {% endfor %}
     </div>

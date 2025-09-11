@@ -1,13 +1,10 @@
 {% extends 'main/layout.html' %}
 
 {% block content %}
-<div>
-  <div>
-    <div>
-      <div>
+
         <div>
           <h2>Register for FastFox Pizzeria</h2>
-          <form method="post" novalidate style="width: 100%; max-width: 400px; margin-left: -147px;" id="registration-form">
+          <form method="post" novalidate style="width: 100%; max-width: 400px;" id="registration-form">
             {% csrf_token %}
 
             <!-- Form Fields -->
@@ -71,10 +68,6 @@
             </div>
           </form>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 {% endblock %}
