@@ -1,3 +1,4 @@
+import news
 {% extends 'main/layout.html' %}
 {% load static %}
 
@@ -5,8 +6,9 @@
 
 {% block content %}
     <header>
-        {% if user.is_authenticated %}
-                <h3> Погода в {{weather.city}}: {{weather.temp}} C, {{weather.description}}</h3>
+
+        {% if user.is_authenticated and weather %}
+                <h3> Погода в {{weather.city}}е: {{weather.temp}} C, {{weather.description}}</h3>
 
         {% elif user.is_authenticated %}
                 <h3> Погода временно недоступна</h3>
@@ -18,11 +20,34 @@
     <section>
         <article>
             <h1>Welcome to FastFox pizzeria</h1>
+            <img src="{% static 'main/img/banner_2.jpg' %}" alt="" >
+
+        </article>
+
+        <article>
+            {% if last_news %}
+                <h2> Последняя новость на нашем сайте</h2>
+                        <h2>{{ last_news.title }}</h2>
+                        <h3>{{ last_news.anons }}</h3>
+                        {% if last_news.image %}
+                            <img src="{{ last_news.image.url }}" alt="Image for {{ last_news.title }}" style="max-height: 300px;">
+                        {% endif %}
+
+                        <h6> {{last_news.date}} </h6>
+                        <a href="{% url 'news:details_view' last_news.id %}"> Read details</a>
+
+            {% else %}
+                <h2> Последняя новость на нашем сайте ушла на обед :)</h2>
+            {% endif %}
 
         </article>
 
 
     </section>
+
+    <footer>
+        <h4>Наши партнёры:</h4>
+    </footer>
 
 
 {% endblock %}
