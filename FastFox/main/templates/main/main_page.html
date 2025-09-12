@@ -4,7 +4,25 @@
 {% block title %}Главная - FastFox{% endblock %}
 
 {% block content %}
+    <header>
+        {% if user.is_authenticated %}
+                <h3> Погода в {{weather.city}}: {{weather.temp}} C, {{weather.description}}</h3>
 
+        {% elif user.is_authenticated %}
+                <h3> Погода временно недоступна</h3>
+        {% endif %}
+
+
+    </header>
+
+    <section>
+        <article>
+            <h1>Welcome to FastFox pizzeria</h1>
+
+        </article>
+
+
+    </section>
 
 
 {% endblock %}

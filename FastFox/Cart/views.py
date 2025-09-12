@@ -53,6 +53,14 @@ def clear_cart(request):
     return redirect('cart:cart_detail')
 
 @login_required
-def clear_cart(request):
-    CartItem.objects.filter(user=request.user).delete()
+def update_quantity(request, item_id):
+    if request.method == 'POST':
+        item = get_object_or_404(CartItem, id=item_id)
+        try:
+            quantity = int(request.POST.get('quantity', 1))
+            if quantity > 0:
+                item.quantity = quantity
+                item.save()
+        except ValueError:
+            pass
     return redirect('cart:cart_detail')

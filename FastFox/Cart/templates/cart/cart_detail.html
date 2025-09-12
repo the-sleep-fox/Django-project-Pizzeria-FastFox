@@ -19,9 +19,15 @@
         {% for item in cart_items %}
           <tr>
             <td>{{ item.pizza.name }}</td>
-            <td>{{ item.pizza.price }} ₽</td>
-            <td>{{ item.quantity }}</td>
-            <td>{{ item.get_total_price }} ₽</td>
+            <td>{{ item.pizza.price }} Byn</td>
+            <td>
+                <form method="post" action="{% url 'cart:update_quantity' item.id %}" >
+                    {% csrf_token %}
+                    <input type="number" name="quantity" value="{{ item_quantity }}" min="1" style="width: 70px" >
+                    <button type="submit">Обновить</button>
+                </form>
+            </td>
+            <td>{{ item.get_total_price }} Byn</td>
             <td>
               <a href="{% url 'cart:remove_from_cart' item.id %}">Удалить</a>
             </td>
@@ -34,7 +40,7 @@
     <a href="{% url 'order:create_order' %}">Оформить заказ</a>
   {% else %}
     <p>Корзина пуста.</p>
-    <a href="{% url 'home' %}"> Go to menu</a>
+    <a href="{% url 'pizza:pizza_list' %}"> Go to menu</a>
   {% endif %}
 </div>
 {% endblock %}

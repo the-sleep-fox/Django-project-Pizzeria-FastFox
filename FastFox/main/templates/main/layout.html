@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %}</title>
-    <link rel="icon" type="text/png" href="main/static/main/img/FastFoxLogo.png" />
+    <link rel="apple-touch-icon"  type="text/png" href="main/static/main/img/favicon.png" />
 </head>
 <body>
 
@@ -25,15 +25,15 @@
                     </ul>
                     <form action="{% url 'logout' %}" method="post" style="display: inline;">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-outline-danger btn-sm">Выйти</button>
+                        <button type="submit">Выйти</button>
                     </form>
 
                 {% elif user.is_authenticated %}
                     <span class="me-2"> Hi, {{ user.username }}!</span>
-                    <a class="nav-link" href="{% url 'order:my_orders' %}">Мои заказы</a>
+                    <a href="{% url 'order:my_orders' %}">Мои заказы</a>
                     <form action="{% url 'logout' %}" method="post" style="display: inline;">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-outline-danger btn-sm">Выйти</button>
+                        <button type="submit">Выйти</button>
                     </form>
                     <h3>Navigation</h3>
                     <ul>
@@ -47,11 +47,11 @@
                         <a href="{% url 'promocodes' %}"><li> Promo-codes </li></a>
                         <a href="{% url 'offers' %}"><li> We offer </li></a>
                         <a href="{% url 'questions' %}"><li> You're asking </li></a>
-                        <a href="{% url 'create_review' %}"><li><button class="btn btn-info"><i class='fas fa-plus-circle>'></i>Add review</button></li></a>
+                        <a href="{% url 'create_review' %}"><li><button><i></i>Add review</button></li></a>
                     </ul>
                 {% else %}
-                    <a href="{% url 'login' %}" class="btn btn-outline-success btn-sm me-2">Войти</a>
-                    <a href="{% url 'register' %}" class="btn btn-outline-primary btn-sm">Регистрация</a>
+                    <a href="{% url 'login' %}">Войти</a>
+                    <a href="{% url 'register' %}">Регистрация</a>
                     <h3>Navigation</h3>
                     <ul>
                         <a href="{% url 'home' %}"><li>Main</li></a>
@@ -63,7 +63,7 @@
                         <a href="{% url 'promocodes' %}"><li> Promo-codes </li></a>
                         <a href="{% url 'offers' %}"><li> We offer </li></a>
                         <a href="{% url 'questions' %}"><li> You're asking </li></a>
-                        <a href="{% url 'create_review' %}"><li><button class="btn btn-info"><i class='fas fa-plus-circle>'></i>Add review</button></li></a>
+                        <a href="{% url 'create_review' %}"><li><button><i></i>Add review</button></li></a>
                     </ul>
                 {% endif %}
             </div>

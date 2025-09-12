@@ -4,63 +4,44 @@
 
 {% block content %}
 
+    <section>
+        <article>
+            <h1>Welcome to FastFox Pizzeria</h1>
+            <p>Crafting perfect pizzas with love since 2023</p>
+            <a href="{% url 'pizza:pizza_list' %}" >Explore Our Menu</a>
+        </article>
 
-  <div class="container">
-    <h1>Welcome to FastFox Pizzeria</h1>
-    <p>Crafting perfect pizzas with love since 2023</p>
-    <a href="{% url 'pizza:pizza_list' %}" >Explore Our Menu</a>
-  </div>
+        <article>
+            <img src="{% static 'main/img/foxes_in_the_kitchen.png' %}" alt="Our kitchen">
+              <div>
+                <h2>Who We Are</h2>
+                <p>We are a family-owned pizzeria passionate about making the best pizza in town. Every slice is made with fresh ingredients, handcrafted dough and a lot of love.</p>
+                <p>From classic Margherita to bold, modern combinations — our menu has something for everyone, including vegan and gluten-free options!</p>
+              </div>
+        </article>
 
+        <article>
+            <h2>Why Choose Us?</h2>
+            <h4>🍕 Authentic Recipe</h4>
+            <p>Made using traditional Italian methods and imported ingredients.</p>
 
+            <h4>🔥 Wood-Fired Oven</h4>
+            <p>Cooked to perfection in our stone oven at 450°C for that crispy crust.</p>
 
-  <div class="container">
-    <div>
-      <div>
-        <img src="{% static 'main/img/foxes_in_the_kitchen.png' %}" alt="Our kitchen">
-      </div>
-      <div>
-        <h2>Who We Are</h2>
-        <p>We are a family-owned pizzeria passionate about making the best pizza in town. Every slice is made with fresh ingredients, handcrafted dough and a lot of love.</p>
-        <p>From classic Margherita to bold, modern combinations — our menu has something for everyone, including vegan and gluten-free options!</p>
-      </div>
-    </div>
-  </div>
-
-
-
-  <div class="container">
-    <h2>Why Choose Us?</h2>
-    <div>
-      <div>
-        <div>
-          <h4>🍕 Authentic Recipe</h4>
-          <p>Made using traditional Italian methods and imported ingredients.</p>
-        </div>
-      </div>
-      <div">
-        <div>
-          <h4>🔥 Wood-Fired Oven</h4>
-          <p>Cooked to perfection in our stone oven at 450°C for that crispy crust.</p>
-        </div>
-      </div>
-      <div>
-        <div>
-          <h4>🚀 Fast Delivery</h4>
-          <p>Freshly baked and delivered hot to your door within 45 minutes.</p>
-        </div>
-      </div>
-    </div>
-  </div>
+            <h4>🚀 Fast Delivery</h4>
+            <p>Freshly baked and delivered hot to your door within 45 minutes.</p>
+        </article>
 
 
-<!-- Call to Action -->
+        <article>
+            <h2>Craving Some Pizza?</h2>
+            <p>Order now and taste the magic we put into every bite.</p>
+            <a href="{% url 'register' %}" class="btn btn-light btn-lg me-3">Register</a>
+            <a href="{% url 'get_contacts' %}" class="btn btn-outline-light btn-lg">Contact Us</a>
+        </article>
 
-  <div class="container">
-    <h2>Craving Some Pizza?</h2>
-    <p>Order now and taste the magic we put into every bite.</p>
-    <a href="{% url 'register' %}" class="btn btn-light btn-lg me-3">Register</a>
-    <a href="{% url 'get_contacts' %}" class="btn btn-outline-light btn-lg">Contact Us</a>
-  </div>
+    </section>
+
 
 
 {% endblock %}
