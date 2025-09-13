@@ -39,12 +39,7 @@ def get_weather(city="Minsk"):
         return None
 
 def get_patners():
-    partners = Partners.objects.all()
-    print(f"partner: {partners}")
-    return {
-        'partners': partners
-    }
-
+    return Partners.objects.all()
 
 def about(request):
     return render(request, 'main/about.html')

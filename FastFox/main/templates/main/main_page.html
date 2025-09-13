@@ -46,12 +46,12 @@ import news
 
     </section>
 
-    <footer>
+    <footer type="inline">
         <h4>Наши партнёры:</h4>
         {%  for partner in partners %}
             {% if partner.image %}
-                <a href="{{ partner.link.}}">
-                    <img src="{{ partner.image.url }}" alt="{{ partner.name }}" >
+                <a href="{{ partner.link }}">
+                    <img src="{{ partner.image.url }}" alt="{{ partner.name }}" width="450" height="300" title="{{ partner.name }}" >
                 </a>
             {% else %}
                 <h3>{{ partner.name }}</h3>
