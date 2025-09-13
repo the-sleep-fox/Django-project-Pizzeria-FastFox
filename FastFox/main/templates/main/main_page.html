@@ -34,10 +34,11 @@ import news
                         {% endif %}
 
                         <h6> {{last_news.date}} </h6>
-                        <a href="{% url 'news:details_view' last_news.id %}"> Read details</a>
+                        <a href="{% url 'news-detail' last_news.id %}"> Read details</a>
 
             {% else %}
                 <h2> Последняя новость на нашем сайте ушла на обед :)</h2>
+
             {% endif %}
 
         </article>
@@ -47,6 +48,19 @@ import news
 
     <footer>
         <h4>Наши партнёры:</h4>
+        {%  for partner in partners %}
+            {% if partner.image %}
+                <a href="{{ partner.link.}}">
+                    <img src="{{ partner.image.url }}" alt="{{ partner.name }}" >
+                </a>
+            {% else %}
+                <h3>{{ partner.name }}</h3>
+                <p>Изображение отсутствует</p>
+            {% endif %}
+            <h3>{{ partner.name }}</h3>
+        {% endfor %}
+
+
     </footer>
 
 

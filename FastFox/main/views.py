@@ -4,6 +4,7 @@ from django.shortcuts import render
 import news
 from main import settings
 from Pizza.models import Pizza
+from main.models import Partners
 from news.models import Articles
 
 WEATHER_API_KEY ='223aceb73cbe01a2e2ab28cd5819cb4a'
@@ -11,9 +12,11 @@ WEATHER_API_KEY ='223aceb73cbe01a2e2ab28cd5819cb4a'
 def index(request):
     last_news = Articles.objects.order_by('-date').first()
     weather = get_weather()
+    partners = get_patners()
     return render(request, 'main/main_page.html', {
         'last_news': last_news,
-        'weather': weather
+        'weather': weather,
+        'partners': partners
     })
 
 def get_weather(city="Minsk"):
@@ -35,7 +38,12 @@ def get_weather(city="Minsk"):
         print("Ошибка:", e)
         return None
 
-
+def get_patners():
+    partners = Partners.objects.all()
+    print(f"partner: {partners}")
+    return {
+        'partners': partners
+    }
 
 
 def about(request):
