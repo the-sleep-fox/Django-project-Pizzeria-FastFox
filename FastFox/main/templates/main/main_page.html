@@ -7,7 +7,7 @@ import news
 {% block content %}
     <header>
 
-        {% if user.is_authenticated and weather %}
+        {% if weather %}
                 <h3> Погода в {{weather.city}}е: {{weather.temp}} C, {{weather.description}}</h3>
 
         {% elif user.is_authenticated %}
