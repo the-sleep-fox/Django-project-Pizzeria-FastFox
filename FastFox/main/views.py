@@ -1,9 +1,8 @@
+
+import random
 import requests
 from django.shortcuts import render
 
-import news
-from main import settings
-from Pizza.models import Pizza
 from main.models import Partners
 from news.models import Articles
 
@@ -13,10 +12,12 @@ def index(request):
     last_news = Articles.objects.order_by('-date').first()
     weather = get_weather()
     partners = get_patners()
+    banner_name = get_random_banner()
     return render(request, 'main/main_page.html', {
         'last_news': last_news,
         'weather': weather,
-        'partners': partners
+        'partners': partners,
+        'banner_name': banner_name
     })
 
 def get_weather(city="Minsk"):
@@ -43,3 +44,9 @@ def get_patners():
 
 def about(request):
     return render(request, 'main/about.html')
+
+def get_random_banner():
+    banner_list = ["banner_1.jpeg", "banner_2.png", "banner_3.jpeg"]
+    return random.choice(banner_list)
+
+
