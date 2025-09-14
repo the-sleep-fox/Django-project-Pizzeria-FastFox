@@ -12,31 +12,49 @@
 
     <section>
 
-        <article class="workers_contacts">
+        <article>
+          {% if workers %}
+            {% for worker in workers %}
+              <section aria-labelledby="worker-name-{{ forloop.counter }}">
+                {% if worker.photo %}
+                  <figure>
+                    <img src="{{ worker.photo.url }}" alt="Фотография {{ worker.name }}, сотрудник пиццерии" loading="lazy">
+                    <figcaption>Фото {{ worker.name }}</figcaption>
+                  </figure>
+                {% endif %}
 
-            {% if workers %}
-                {% for worker in workers %}
-                    {% if worker.photo %}
-                        <img src="{{ worker.photo.url }}" alt="Image for {{ worker.name }}" style="max-height: 300px;">
-                    {% endif %}
+                <h2 id="worker-name-{{ forloop.counter }}">{{ worker.name }}</h2>
 
-                    <h2> Имя: {{worker.name}}</h2>
-                    <h2> Описание должности: {{worker.job_description}}</h2>
+                <h3>Должность</h3>
+                <p>{{ worker.job_description }}</p>
 
-                    {% if user.is_authenticated and user.is_superuser %}
-                        <h3> Номер телефона: {{worker.phone_number}}</h3>
-                    {% endif %}
+                <dl>
+                  <dt>Email</dt>
+                  <dd><a href="mailto:{{ worker.email }}">{{ worker.email }}</a></dd>
 
-                    <h3> Email: {{worker.email}}</h3>
+                  {% if user.is_authenticated and user.is_superuser %}
+                    <dt>Телефон</dt>
+                    <dd><a href="tel:{{ worker.phone_number }}">{{ worker.phone_number }}</a></dd>
+                  {% endif %}
+                </dl>
 
-                {% endfor %}
-
-            {% else %}
-                <h3>Кажется мы ждём расширение стафа ... Скоро вы со всеми познакомитесь!</h3>
-
-            {% endif %}
-
-
+                <address>
+                  {% if worker.email or worker.phone_number %}
+                    Связаться с {{ worker.name }}{% if user.is_authenticated and user.is_superuser %} (доступно для администраторов){% endif %}
+                  {% endif %}
+                </address>
+              </section>
+            {% endfor %}
+          {% else %}
+            <section>
+              <h2>Наша команда</h2>
+              <p>Кажется, мы ждём расширение штата… Скоро вы со всеми познакомитесь!</p>
+              <figure>
+                <img src="/static/images/team-placeholder.png" alt="Иллюстрация команды пиццерии — люди собираются вокруг пиццы" loading="lazy">
+                <figcaption>Мы растём — и скоро добавим новых мастеров кухни!</figcaption>
+              </figure>
+            </section>
+          {% endif %}
         </article>
         <article class="contacts">
             <h4>📞 Phone</h4>
