@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %}</title>
-    <link rel="apple-touch-icon"  type="text/png" href="main/static/main/img/favicon.png" />
+    <link rel="icon"  type="image/png" href="FastFox/main/static/main/img/fox.png" />
 </head>
 <body>
 
@@ -74,5 +74,8 @@
         {% block content %}
         {% endblock %}
     </main>
+    <footer>
+        <a href="{% url 'privacy' %}"><li> Политика конфиденциальности </li></a>
+    </footer>
 </body>
 </html>

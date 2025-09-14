@@ -45,6 +45,9 @@ def get_patners():
 def about(request):
     return render(request, 'main/about.html')
 
+def privacy(request):
+    return render(request, 'main/privacy.html')
+
 def get_random_banner():
     banner_list = ["banner_1.jpeg", "banner_2.png", "banner_3.jpeg"]
     return random.choice(banner_list)
